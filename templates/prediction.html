@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>API de segmentation des images | Construction d'une voiture autonome</title>
+    <title>API de segmentation des images | Prediction</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
@@ -23,24 +23,32 @@
 
     <div class="container">
       <div class="header clearfix">
-        <h3 class="text-muted">Computer Vision | Data segmentation </h3>
+        <h3 class="text-muted">Computer Vision | Data segmentation</h3>
       </div>
 
       <div class="jumbotron">
-        <h1>Construction d'une voiture autonome 🚙</h1>
+        <h1>Segmentation de l'image : {{name_img}} 🤖</h1>
         <br>
-        <p class="lead">Renseignez le nom de l'image</p>
-        <form action="/predict/" method="post">
-            <input type="text" class="form-control" id="MedInc" name="name_img" placeholder="ex : aachen_000000_000019">
+        <p> Image d'origine </p>
+            <img src="/static/origine.png" width="512" height="256">
                 <br>
-                <button type="submit" class="btn btn-primary">Lancez la segmentation </button>
-      
-      </div class="form-row">
-		</form>
-		<br>
+                <br>
+            <p> Image avec segmentation</p>
+            <img src="/static/pred.png" width="512" height="256">
+            
+      </div>
+
+	  <br>
+	  <div class="text-center">
+	  	<a href="/" class="btn btn-primary">Retour</a>
+	  </div>
+	  
+	  <br>
       <footer class="footer">
               <span class="italic">Copyright &copy; <a href="https://github.com/Mickevin" target="_blank">Kévin Duranty</a> pour <a href="https://www.openclassrooms.com" target="_blank"> OpenClassrooms</a></span>
       </footer>
+
     </div> <!-- /container -->
   </body>
 </html>
+
