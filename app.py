@@ -1,10 +1,7 @@
 from flask import Flask, render_template, request
 
 
-import numpy as np
-import requests
-import pickle
-import cv2
+
 
 
 
@@ -26,6 +23,11 @@ def california_index():
 
 @app.route('/predict/', methods=['POST'])
 def result():
+
+    import numpy as np
+    import requests
+    import pickle
+    import cv2
     from tensorflow.keras.models import load_model
     import matplotlib.pyplot as plt
     
