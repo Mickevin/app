@@ -1,4 +1,4 @@
-# Sauvegarde du fichier data dans l'espace de stockage Azure
+# Sauvegarde du fichier da# Sauvegarde du fichier data dans l'espace de stockage Azure
 from flask import Flask, render_template, request
 from keras.models import load_model
 
@@ -9,23 +9,17 @@ from matplotlib.pyplot import imsave
 from PIL import Image
 from numpy import array
 import requests
+import cv2
 
 app = Flask(__name__)
 
-# Connection à l'espace de travail d'Azure
-ws = Workspace(subscription_id="d5bb9744-4790-446f-b7e1-591e22995cc7",
-           resource_group="OpenClassrooms",
-           workspace_name="OC_IA")
-try :
-    Model(ws, 'Model_vgg_unet').download()
-except:
-    pass
-model = load_model('./model_vgg_unet/')
+model = load_model('model_cnn/', compile=False)
 
 def load_img_from_azure(name):
     # Connection à l'espace de travail d'Azure
     url = f'https://ocia0932039034.blob.core.windows.net/azureml-blobstore-f8554f92-a33d-430c-a1ff-4d9a166c55fc/UI/data/{name}_leftImg8bit.png'
     X =  array(Image.open(requests.get(url, stream=True).raw))
+    X = cv2.resize(X, (1024, 512))
     imsave('./static/origine.png',X)
     return X
 
@@ -38,8 +32,8 @@ def result():
     if request.method == 'POST':
         name_img = request.form['name_img']
         X = array([load_img_from_azure(name_img)])
-        y = array([[i.argmax() for i in u] for u in model.predict(X[:])])
-        imsave('./static/pred.png',y.reshape((512,1024)))
+        y = array([[i.argmax() for i in u] for u in model.predict(X[:])[0]])
+        imsave('./static/pred.png',y)
     return render_template("prediction.html", name_img=name_img)
 
 if __name__ == '__main__':
