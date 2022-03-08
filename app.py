@@ -10,7 +10,6 @@ import cv2
 
 app = Flask(__name__)
 
-model = load_model('model_cnn/', compile=False)
 
 def load_img_from_azure(name):
     # Connection à l'espace de travail d'Azure
@@ -26,6 +25,8 @@ def california_index():
 
 @app.route('/predict/', methods=['POST'])
 def result():
+    model = load_model('model_cnn/', compile=False)
+
     if request.method == 'POST':
         name_img = request.form['name_img']
         X = array([load_img_from_azure(name_img)])
