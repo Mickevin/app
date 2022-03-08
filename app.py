@@ -2,9 +2,6 @@
 from flask import Flask, render_template, request
 from keras.models import load_model
 
-from azureml.core import Workspace
-from azureml.core.model import Model
-
 from matplotlib.pyplot import imsave
 from PIL import Image
 from numpy import array
