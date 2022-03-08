@@ -1,22 +1,7 @@
 # Sauvegarde du fichier data dans l'espace de stockage Azure
 from flask import Flask, render_template, request
-from tensorflow.keras.models import load_model
-
-from azureml.core import Workspace
-from azureml.core.model import Model
-
-from matplotlib.pyplot import imsave
-from PIL import Image
-from numpy import array
-import requests
 
 app = Flask(__name__)
-
-# Connection à l'espace de travail d'Azure
-ws = Workspace(subscription_id="d5bb9744-4790-446f-b7e1-591e22995cc7",
-           resource_group="OpenClassrooms",
-           workspace_name="OC_IA")
-model = load_model(Model.get_model_path('Model_vgg_unet', _workspace=ws))
 
 def load_img_from_azure(name):
     # Connection à l'espace de travail d'Azure
@@ -31,7 +16,23 @@ def california_index():
 
 
 @app.route('/predict/', methods=['POST'])
-def result():    
+def result():
+    from tensorflow.keras.models import load_model
+
+    from azureml.core import Workspace
+    from azureml.core.model import Model
+
+    from matplotlib.pyplot import imsave
+    from PIL import Image
+    from numpy import array
+    import requests
+    
+    # Connection à l'espace de travail d'Azure
+    ws = Workspace(subscription_id="d5bb9744-4790-446f-b7e1-591e22995cc7",
+               resource_group="OpenClassrooms",
+               workspace_name="OC_IA")
+    model = load_model(Model.get_model_path('Model_vgg_unet', _workspace=ws))
+
     if request.method == 'POST':
         name_img = request.form['name_img']
         X = array([load_img_from_azure(name_img)])
