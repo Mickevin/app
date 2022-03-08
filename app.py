@@ -25,7 +25,7 @@ def california_index():
 
 @app.route('/predict/', methods=['POST'])
 def result():
-    from keras.models import load_model
+    from tensorflow.keras.models import load_model
     from matplotlib.pyplot import imsave
     model = load_model('./model_cnn/', compile=False)
 
