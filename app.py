@@ -16,8 +16,11 @@ app = Flask(__name__)
 ws = Workspace(subscription_id="d5bb9744-4790-446f-b7e1-591e22995cc7",
            resource_group="OpenClassrooms",
            workspace_name="OC_IA")
-model = load_model(Model.get_model_path('Model_vgg_unet', _workspace=ws))
-    
+try :
+    Model(ws, 'Model_vgg_unet').download()
+except:
+    pass
+model = load_model('./model_vgg_unet/')
 
 def load_img_from_azure(name):
     # Connection à l'espace de travail d'Azure
