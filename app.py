@@ -1,21 +1,19 @@
 # Sauvegarde du fichier da# Sauvegarde du fichier data dans l'espace de stockage Azure
 from flask import Flask, render_template, request
-from keras.models import load_model
-
-from matplotlib.pyplot import imsave
-from PIL import Image
-from numpy import array
-import requests
-import cv2
 
 app = Flask(__name__)
 
 
 def load_img_from_azure(name):
+    import requests
+    from numpy import array
+    from matplotlib.pyplot import imsave
+    from PIL import Image
+    from cv2 import resize
     # Connection à l'espace de travail d'Azure
     url = f'https://ocia0932039034.blob.core.windows.net/azureml-blobstore-f8554f92-a33d-430c-a1ff-4d9a166c55fc/UI/data/{name}_leftImg8bit.png'
     X =  array(Image.open(requests.get(url, stream=True).raw))
-    X = cv2.resize(X, (1024, 512))
+    X = resize(X, (1024, 512))
     imsave('./static/origine.png',X)
     return X
 
@@ -25,6 +23,9 @@ def california_index():
 
 @app.route('/predict/', methods=['POST'])
 def result():
+    from numpy import array
+    from keras.models import load_model
+    from matplotlib.pyplot import imsave
     model = load_model('model_cnn/', compile=False)
 
     if request.method == 'POST':
