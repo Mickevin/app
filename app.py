@@ -17,7 +17,7 @@ def california_index():
 
 @app.route('/predict/', methods=['POST'])
 def result():
-    from tensorflow.keras.models import load_model
+    from keras.models import load_model
 
     from azureml.core import Workspace
     from azureml.core.model import Model
