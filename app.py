@@ -2,11 +2,12 @@
 from flask import Flask, render_template, request
 from PIL.Image import open
 from cv2 import resize
-from requests import get
+from numpy import array
 
 app = Flask(__name__)
 
 def load_img_from_azure(name):
+    from requests import get
     from matplotlib.pyplot import imsave
     # Connection à l'espace de travail d'Azure
     url = f'https://ocia0932039034.blob.core.windows.net/azureml-blobstore-f8554f92-a33d-430c-a1ff-4d9a166c55fc/UI/data/{name}_leftImg8bit.png'
