@@ -1,12 +1,12 @@
 # Sauvegarde du fichier da# Sauvegarde du fichier data dans l'espace de stockage Azure
 from flask import Flask, render_template, request
 from PIL.Image import open
+from cv2 import resize
     
 
 app = Flask(__name__)
 
 def load_img_from_azure(name):
-    from cv2 import resize
     from requests import get
     from numpy import array
     from matplotlib.pyplot import imsave
