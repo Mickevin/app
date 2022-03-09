@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'detection-cv'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_93C7FA2BA631453DA9E69097E38AC0CC }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D7BB01B92C6A40FE97E8406767B48F89 }}
