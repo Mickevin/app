@@ -1,7 +1,7 @@
 # Sauvegarde du fichier da# Sauvegarde du fichier data dans l'espace de stockage Azure
 from flask import Flask, render_template, request
 from PIL.Image import open
-#from cv2 import resize
+from cv2 import resize
 from numpy import array
 
 app = Flask(__name__)
