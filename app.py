@@ -2,11 +2,11 @@
 from flask import Flask, render_template, request
 from PIL.Image import open
 from cv2 import resize
-from numpy import array
 
 app = Flask(__name__)
 
 def load_img_from_azure(name):
+    from numpy import array
     from requests import get
     from matplotlib.pyplot import imsave
     # Connection à l'espace de travail d'Azure
@@ -22,6 +22,7 @@ def california_index():
 
 @app.route('/predict/', methods=['POST'])
 def result():
+    from numpy import array
     from tensorflow.keras.models import load_model
     from matplotlib.pyplot import imsave
     model = load_model('./model_cnn/', compile=False)
